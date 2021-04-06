@@ -49,7 +49,7 @@ class App extends React.Component {
           <h4>{`Username: ${this.state.myUsername}`}</h4>
           <h4>{`Location: ${this.state.myLocation}`}</h4>
           <h4>{`Profile Link: `}<a href={this.state.myProfile}>{this.state.myProfile}</a></h4>
-          <div className="FollowerListContainer">
+          <div className="FollowersListContainer">
             <FollowersList followers={this.state.myFollowers}/>
           </div>
         </div>
