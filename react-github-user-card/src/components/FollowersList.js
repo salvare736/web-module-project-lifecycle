@@ -10,6 +10,8 @@ class FollowersList extends React.Component {
         <h2>My Followers:</h2>
         <div className="FollowersContainer">
           <Follower />
+          <Follower />
+          <Follower />
         </div>
       </div>
     );
