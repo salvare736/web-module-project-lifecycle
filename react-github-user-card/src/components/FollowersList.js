@@ -9,9 +9,9 @@ class FollowersList extends React.Component {
       <div className="FollowersList">
         <h2>My Followers:</h2>
         <div className="FollowersContainer">
-          <Follower />
-          <Follower />
-          <Follower />
+          {this.props.followers.map(follower => (
+            <Follower key={follower.id} follower={follower} />
+          ))}
         </div>
       </div>
     );

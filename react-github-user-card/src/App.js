@@ -5,21 +5,62 @@ import FollowersList from './components/FollowersList';
 import './App.css';
 
 class App extends React.Component {
+  state = {
+    myAvatar: '',
+    myName: '',
+    myUsername: '',
+    myLocation: '',
+    myProfile: '',
+    myFollowers: [],
+  }
+
+  componentDidMount() {
+    axios.get('https://api.github.com/users/salvare736')
+      .then(resp => {
+        this.setState({
+          myAvatar: resp.data.avatar_url,
+          myName: resp.data.name,
+          myUsername: resp.data.login,
+          myLocation: resp.data.location,
+          myProfile: resp.data.html_url,
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    axios.get('https://api.github.com/users/salvare736/followers')
+      .then(resp => {
+        this.setState({
+          myFollowers: resp.data
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   render() {
-    return (
-      <div className="AppContainer">
-        <h1>My Github Info!</h1>
-        <img src='https://avatars.githubusercontent.com/u/77025344?v=4' alt='avatar' />
-        <h3>{`Name: Sergio Alvarez`}</h3>
-        <h4>{`Username: salvare736`}</h4>
-        <h4>{`Location: South Florida`}</h4>
-        <h4>{`Profile Link: `}<a href={`https://github.com/salvare736`}>{`https://github.com/salvare736`}</a></h4>
-        <div className="FollowerListContainer">
-          <FollowersList />
+    if (this.state.myFollowers.length !== 0) {
+      return (
+        <div className="AppContainer">
+          <h1>My Github Info!</h1>
+          <img src={this.state.myAvatar} alt='avatar' />
+          <h3>{`Name: ${this.state.myName}`}</h3>
+          <h4>{`Username: ${this.state.myUsername}`}</h4>
+          <h4>{`Location: ${this.state.myLocation}`}</h4>
+          <h4>{`Profile Link: `}<a href={this.state.myProfile}>{this.state.myProfile}</a></h4>
+          <div className="FollowerListContainer">
+            <FollowersList followers={this.state.myFollowers}/>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="AppContainer">
+          <p>Loading data...</p>
+        </div>
+      );
+    }
   }
 }
 
