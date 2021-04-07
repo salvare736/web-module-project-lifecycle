@@ -1,0 +1,19 @@
+.FollowersListContainer {
+  margin-top: 40px
+}
+
+.Follower {
+  margin: 20px 0px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  
+}
+
+.FollowerDetails {
+  margin-left: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
